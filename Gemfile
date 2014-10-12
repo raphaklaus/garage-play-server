@@ -4,7 +4,10 @@ gem 'rails', '4.1.5'
 
 gem 'rails-api'
 
-gem 'spring', :group => :development
+group :development do
+  gem 'spring'
+  gem 'capistrano-rails', '~> 1.1.1'
+end
 
 gem 'mysql2'
 
