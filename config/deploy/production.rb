@@ -6,7 +6,8 @@
 
 role :app, %w{deployer@garageplay.net}
 role :web, %w{deployer@garageplay.net}
-role :db,  %w{deployer@garageplay.net}
+# Raphael D. Pinheiro: It seems that the line above is getting conflict with mysql service (sock file specially).
+#role :db,  %w{deployer@garageplay.net} 
 
 
 # Extended Server Syntax

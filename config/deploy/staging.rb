@@ -6,7 +6,8 @@
 
 role :app, %w{}
 role :web, %w{}
-role :db,  %w{}
+# Raphael D. Pinheiro: It seems that the line above is getting conflict with mysql service (sock file specially).
+#role :db,  %w{}
 
 
 # Extended Server Syntax

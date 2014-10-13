@@ -14,7 +14,9 @@ set :deploy_via, :copy
 set :use_sudo, false
 set :ssh_options, {:forward_agent => true}
 # Default value for :scm is :git
-set :user, "deploy"
+set :user, "deployer"
+
+set :keep_releases, 5
 # Default value for :format is :pretty
 # set :format, :pretty
 
@@ -34,15 +36,14 @@ set :user, "deploy"
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
-
 namespace :deploy do
 
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+      execute "cd #{deploy_to}/current && bundle install && rails server thin -d -e production"
+      #execute ""# && bundle install "
     end
   end
 
