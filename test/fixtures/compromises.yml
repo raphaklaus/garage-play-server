@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  location: MyString
+  datehour: 2014-12-02 22:18:29
+  description: MyString
+  periodicity: 1
+
+two:
+  title: MyString
+  location: MyString
+  datehour: 2014-12-02 22:18:29
+  description: MyString
+  periodicity: 1
