@@ -2,7 +2,7 @@ class CompromisesController < ApplicationController
   # GET /compromises
   # GET /compromises.json
   def index
-    @compromises = Compromise.all
+    @compromises = Compromise.order(created_at: :desc)
 
     render json: @compromises
   end
