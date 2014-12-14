@@ -42,7 +42,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      execute "cd #{deploy_to}/current && bundle install && rails server thin -d -e production"
+      execute "cd #{deploy_to}/current && bundle install && RAILS_ENV=production rake db:migrate && rails server thin -d -e production"
       #execute ""# && bundle install "
     end
   end
