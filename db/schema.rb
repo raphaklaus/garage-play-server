@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210200351) do
+ActiveRecord::Schema.define(version: 20150117202354) do
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "reminder_id"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["reminder_id"], name: "index_comments_on_reminder_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "compromises", force: true do |t|
     t.string   "title"

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments, except: [:new, :edit]
   resources :reminders, except: [:new, :edit]
   match 'reminders(/:id(.:format))' => 'reminders#index', :via => :options
   

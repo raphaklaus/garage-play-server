@@ -43,7 +43,7 @@ class CompromisesController < ApplicationController
   def update
     @compromise = Compromise.find(params[:id])
 
-    if @compromise.update(params[:compromise])
+    if @compromise.update(compromise_params)
       head :no_content
     else
       render json: @compromise.errors, status: :unprocessable_entity
