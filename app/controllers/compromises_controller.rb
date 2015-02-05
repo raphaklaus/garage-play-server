@@ -61,6 +61,7 @@ class CompromisesController < ApplicationController
 
   private
     def compromise_params
-      params.permit(:title, :description, :datehour, :location, :periodicity)
+      params.permit(:title, :description, :datehour, :location, :periodicity, :sms_notification,
+        :facebook_notification, :email_notification)
     end  
 end

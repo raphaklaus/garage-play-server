@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
-  # def index
-  #   @users = User.all
+  def index
+    @users = User.all
 
-  #   render json: @users
-  # end
+    render json: @users
+  end
 
   # GET /users/1
   # GET /users/1.json
@@ -50,6 +50,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.permit(:name, :email)
+      params.permit(:facebook_id, :name)
     end
 end

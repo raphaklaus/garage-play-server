@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117202354) do
+ActiveRecord::Schema.define(version: 20150205223118) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 20150117202354) do
     t.integer  "periodicity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "email_notification",    default: false
+    t.boolean  "sms_notification",      default: false
+    t.boolean  "facebook_notification", default: false
   end
 
   create_table "reminders", force: true do |t|
@@ -41,10 +44,10 @@ ActiveRecord::Schema.define(version: 20150117202354) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "facebook_id"
+    t.string   "name"
   end
 
 end
