@@ -9,16 +9,16 @@ class CommentsController < ApplicationController
 
   # GET /comments/1
   # GET /comments/1.json
-  def show
-    @comment = Comment.find(params[:id])
+  def getAllCommentsForReminder
+    @comments = Comment.where("reminder_id = :reminder_id", { reminder_id: params[:reminder_id]}).order(id: :desc)
 
-    render json: @comment
+    render json: @comments
   end
 
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.new(comment_params)
 
     if @comment.save
       render json: @comment, status: :created, location: @comment
@@ -47,4 +47,9 @@ class CommentsController < ApplicationController
 
     head :no_content
   end
+
+  private
+    def comment_params
+      params.permit(:text, :user_id, :reminder_id)
+    end  
 end
