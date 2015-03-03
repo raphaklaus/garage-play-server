@@ -15,6 +15,11 @@ class UsersController < ApplicationController
   #   render json: @user
   # end
 
+  def user_exist
+    @user = User.where("facebook_id = :id", {id: params[:id]})
+    render json: @user
+  end
+
   # POST /users
   # POST /users.json
   def create
@@ -50,6 +55,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.permit(:facebook_id, :name)
+      params.permit(:facebook_id, :name, :email)
     end
 end

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   match 'compromises/load_recent/:id' => 'compromises#load_recent', :via => :get
 
   resources :users, except: [:new, :edit]
+  match 'users(/:id(.:format))' => 'users#index', :via => :options
+  match 'users/user_exist(/:id(.:format))' => 'users#user_exist', :via => :get
 
   match 'server/check_health' => 'server#check_health', :via => :get
 
