@@ -9,11 +9,11 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  # def show
-  #   @user = User.find(params[:id])
+  def show
+    @user = User.find(params[:id])
 
-  #   render json: @user
-  # end
+    render json: @user
+  end
 
   def user_exist
     @user = User.where("facebook_id = :id", {id: params[:id]})
