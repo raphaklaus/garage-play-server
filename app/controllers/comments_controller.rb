@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def getAllCommentsForReminder
-    @comments = Comment.select("*, users.name as user_name").joins(:user).where("reminder_id = :reminder_id", { reminder_id: params[:reminder_id]}).order(id: :desc)
+    @comments = Comment.select("comments.id, comments.text, comments.created_at, comments.user_id, comments.reminder_id, users.facebook_id, users.name as user_name").joins(:user).where("reminder_id = :reminder_id", { reminder_id: params[:reminder_id]}).order(id: :desc)
 
     render json: @comments
   end
