@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :reminders, except: [:new, :edit]
   match 'reminders(/:id(.:format))' => 'reminders#index', :via => :options
   
+  resources :contacts, except: [:new, :edit]
+  match 'contacts(/:id(.:format))' => 'contacts#index', :via => :options
+
   resources :compromises, except: [:new, :edit]
   match 'compromises(/:id(.:format))' => 'compromises#index', :via => :options
   match 'compromises/load_more/:id' => 'compromises#load_more', :via => :get

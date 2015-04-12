@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227011742) do
+ActiveRecord::Schema.define(version: 20150408225916) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 20150227011742) do
     t.boolean  "sms_notification",      default: false
     t.boolean  "facebook_notification", default: false
   end
+
+  create_table "contacts", force: true do |t|
+    t.integer  "user_id"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
 
   create_table "reminders", force: true do |t|
     t.string   "text"
