@@ -6,8 +6,6 @@ class ContactsController < ApplicationController
 
 	def create
 		@contact = Contact.new(contact_params)
-		puts("@@@@@@@@@@@@@@@@@@@@@@@@@")
-		puts(@contact.email)
 	    if @contact.save
 	      render json: @contact, status: :created, location: @contact
 	      ContactNotifier.send_contact_confirmation_email(@contact).deliver
