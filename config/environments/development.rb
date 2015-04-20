@@ -35,5 +35,15 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-
+  config.action_mailer.default_url_options = {:host => "localhost:3000"}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => 'staff@garageplay.net',
+    :password => Rails.application.secrets.email_password,
+    :domain => 'garageplay.net',
+    :address => 'rakontome.domain.com',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => false
+  }
 end

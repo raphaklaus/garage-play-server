@@ -3,8 +3,6 @@ class ContactNotifier < ActionMailer::Base
 
   def send_contact_confirmation_email(contact)
   	@contact = contact
-  	puts("######################")
-  	puts(@contact.email)
   	mail(:to => @contact.email, :subject => "Obrigado por nos ajudar a melhorar!")
   end
 
