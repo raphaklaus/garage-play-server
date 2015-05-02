@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   match 'compromises/load_more/:id' => 'compromises#load_more', :via => :get
   match 'compromises/load_recent/:id' => 'compromises#load_recent', :via => :get
 
+  match 'notifications/send_email' => 'notifications#send_email', :via => :get
+
   resources :users, except: [:new, :edit]
   match 'users(/:id(.:format))' => 'users#index', :via => :options
   match 'users/user_exist(/:id(.:format))' => 'users#user_exist', :via => :get

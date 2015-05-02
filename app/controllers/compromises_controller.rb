@@ -32,6 +32,7 @@ class CompromisesController < ApplicationController
     @compromise = Compromise.new(compromise_params)
 
     if @compromise.save
+      create_for_each_notification_type(@compromise)
       render json: @compromise, status: :created, location: @compromise
     else
       render json: @compromise.errors, status: :unprocessable_entity
@@ -64,4 +65,22 @@ class CompromisesController < ApplicationController
       params.permit(:title, :description, :datehour, :location, :periodicity, :sms_notification,
         :facebook_notification, :email_notification)
     end  
+
+    def create_for_each_notification_type(compromise)
+      if compromise.email_notification
+      @notification = Notification.new(:compromise_id => compromise.id, 
+        :send_date => @compromise.datehour, :notification_type => 0)
+      @notification.save
+      end
+      if compromise.sms_notification
+      @notification = Notification.new(:compromise_id => compromise.id, 
+        :send_date => @compromise.datehour, :notification_type => 1)
+      @notification.save
+      end
+      if compromise.facebook_notification
+      @notification = Notification.new(:compromise_id => compromise.id, 
+        :send_date => @compromise.datehour, :notification_type => 2)
+      @notification.save
+      end
+    end
 end

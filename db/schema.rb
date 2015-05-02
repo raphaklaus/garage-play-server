@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408225916) do
+ActiveRecord::Schema.define(version: 20150425185539) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 20150408225916) do
   end
 
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.integer  "compromise_id"
+    t.integer  "notification_type"
+    t.datetime "send_date"
+    t.boolean  "sent",              default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["compromise_id"], name: "index_notifications_on_compromise_id", using: :btree
 
   create_table "reminders", force: true do |t|
     t.string   "text"
