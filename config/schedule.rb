@@ -24,5 +24,9 @@
 # end
 
 every :day, :at => ['9am', '12pm', '3pm', '6pm', '9pm'] do
-	command 'wget http://localhost:3000/cron_job/compromise_email'
+	command 'wget http://localhost:3000/notifications/send_email'
 end
+
+#every :day, :at => ['9am', '12pm', '3pm', '6pm', '9pm'] do
+#	command 'wget http://localhost:3000/cron_job/compromise_email'
+#end
