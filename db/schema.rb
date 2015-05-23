@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425185539) do
+ActiveRecord::Schema.define(version: 20150503010317) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20150425185539) do
     t.string   "facebook_id"
     t.string   "name"
     t.string   "email"
+    t.string   "phone_number", limit: 16
   end
 
 end
