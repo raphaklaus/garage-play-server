@@ -2,7 +2,7 @@ class CompromisesController < ApplicationController
   # GET /compromises
   # GET /compromises.json
   def index
-    @compromises = Compromise.order(created_at: :desc).limit(10)
+    @compromises = Compromise.order(datehour: :desc).limit(10)
 
     render json: @compromises
   end
