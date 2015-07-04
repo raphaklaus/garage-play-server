@@ -45,6 +45,8 @@ class CompromisesController < ApplicationController
     @compromise = Compromise.find(params[:id])
 
     if @compromise.update(compromise_params)
+      Notification.delete_all(["compromise_id = ?", @compromise.id])
+      create_for_each_notification_type(@compromise)
       head :no_content
     else
       render json: @compromise.errors, status: :unprocessable_entity
