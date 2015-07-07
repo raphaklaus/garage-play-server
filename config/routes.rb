@@ -15,14 +15,13 @@ Rails.application.routes.draw do
   match 'compromises/load_recent/:id' => 'compromises#load_recent', :via => :get
 
   match 'notifications/send_email' => 'notifications#send_email', :via => :get
+  match 'notifications/send_sms' => 'notifications#send_sms', :via => :get
 
   resources :users, except: [:new, :edit]
   match 'users(/:id(.:format))' => 'users#index', :via => :options
   match 'users/user_exist(/:id(.:format))' => 'users#user_exist', :via => :get
 
   match 'server/check_health' => 'server#check_health', :via => :get
-
-  match 'cron_job/compromise_email' => 'cron_job#compromise_email', :via => :get
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
