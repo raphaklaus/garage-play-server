@@ -26,8 +26,10 @@ class NotificationsController < ApplicationController
 	    @notifications.each do |c|
 				@users_phones = User.all.pluck(:phone_number)
 				@users_phones.each do |p|
-					@message = "GaragePlay Compromisso: " + c.title + ", em " + c.datehour.strftime("%d/%m/%Y as %H:%M") + " ,local: " + c.location;
-					open('http://www.painelsms.com.br/sms.php?i=1101&s=h8jz0d&funcao=enviar&mensagem=' + URI.encode(@message) + '&destinatario=' + p)
+					if !(p.nil? || p.empty?)
+						@message = "GaragePlay Compromisso: " + c.title + ", em " + c.datehour.strftime("%d/%m/%Y as %H:%M") + " ,local: " + c.location;
+						open('http://www.painelsms.com.br/sms.php?i=1101&s=h8jz0d&funcao=enviar&mensagem=' + URI.encode(@message) + '&destinatario=' + p)
+					end
 				end
 	      c.sent = true
 	      c.save
