@@ -42,14 +42,18 @@ class RemindersController < ApplicationController
   # DELETE /reminders/1
   # DELETE /reminders/1.json
   def destroy
+    request_user = params[:user_id].to_i
     @reminder = Reminder.find(params[:id])
-    @reminder.destroy
-
-    head :no_content
+    if request_user == @reminder.user_id
+      @reminder.destroy
+      head :no_content
+    else
+      render :json => {:message => "The reminder\'s user must be the author."}
+    end 
   end
 
   private
     def reminder_params
-      params.permit(:text, :user_id)
+      params.permit(:text, :user_id, :id)
     end  
 end

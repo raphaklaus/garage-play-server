@@ -42,10 +42,14 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    request_user = params[:user_id].to_i
     @comment = Comment.find(params[:id])
-    @comment.destroy
-
-    head :no_content
+    if request_user == @comment.user_id
+      @comment.destroy
+      head :no_content
+    else
+      render :json => {:message => "The comment\'s user must be the author."}
+    end     
   end
 
   private
