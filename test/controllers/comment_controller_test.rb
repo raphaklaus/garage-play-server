@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CommentscommentTest < Actioncomment::TestCase
+class CommentscommentTest < ActionController::TestCase
   setup do
     @comment = comments(:one)
   end

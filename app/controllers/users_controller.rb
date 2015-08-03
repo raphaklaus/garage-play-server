@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def user_exist
-    @user = User.where("facebook_id = :id", {id: params[:id]})
+    @user = User.where("social_id = :id AND social_type = :type", {id: params[:id], type: params[:type]})
     render json: @user
   end
 
@@ -55,6 +55,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.permit(:facebook_id, :name, :email, :phone_number)
+      params.permit(:name, :email, :phone_number, :social_id, :social_type)
     end
 end
