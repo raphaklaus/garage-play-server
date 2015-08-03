@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+include ActionController::MimeResponds
 after_filter :cors
 
 # Disable Cross Domain restrictions due the Facebook Auth.
