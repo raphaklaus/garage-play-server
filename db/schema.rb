@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803201157) do
+ActiveRecord::Schema.define(version: 20150812041721) do
+
+  create_table "bands", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bands", ["user_id"], name: "index_bands_on_user_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -35,7 +44,10 @@ ActiveRecord::Schema.define(version: 20150803201157) do
     t.boolean  "email_notification",    default: false
     t.boolean  "sms_notification",      default: false
     t.boolean  "facebook_notification", default: false
+    t.integer  "band_id"
   end
+
+  add_index "compromises", ["band_id"], name: "index_compromises_on_band_id", using: :btree
 
   create_table "contacts", force: true do |t|
     t.integer  "user_id"
@@ -62,8 +74,10 @@ ActiveRecord::Schema.define(version: 20150803201157) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "band_id"
   end
 
+  add_index "reminders", ["band_id"], name: "index_reminders_on_band_id", using: :btree
   add_index "reminders", ["user_id"], name: "index_reminders_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
