@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812041721) do
+ActiveRecord::Schema.define(version: 20150812051523) do
 
   create_table "bands", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "city"
+    t.string   "genre"
   end
 
   add_index "bands", ["user_id"], name: "index_bands_on_user_id", using: :btree
