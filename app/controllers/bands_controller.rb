@@ -19,6 +19,8 @@ class BandsController < ApplicationController
   # POST /bands.json
   def create
     @band = Band.new(band_params)
+    @user = User.find(band_params[:user_id])
+    @band.users << @user
 
     if @band.save
       render json: @band, status: :created, location: @band
@@ -50,6 +52,6 @@ class BandsController < ApplicationController
 
   private
     def band_params
-      params.permit(:name, :user_id)
+      params.permit(:name, :user_id, :city, :genre)
     end  
 end

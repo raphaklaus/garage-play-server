@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812051523) do
+ActiveRecord::Schema.define(version: 20150813215607) do
 
   create_table "bands", force: true do |t|
     t.string   "name"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 20150812051523) do
   end
 
   add_index "bands", ["user_id"], name: "index_bands_on_user_id", using: :btree
+
+  create_table "bands_users", force: true do |t|
+    t.integer "band_id"
+    t.integer "user_id"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"

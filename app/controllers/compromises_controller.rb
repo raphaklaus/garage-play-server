@@ -2,19 +2,19 @@ class CompromisesController < ApplicationController
   # GET /compromises
   # GET /compromises.json
   def index
-    @compromises = Compromise.order(datehour: :desc).limit(10)
+    @compromises = Compromise.where("band_id = :bandId", {bandId: params[:bandId]}).order(datehour: :desc).limit(10)
 
     render json: @compromises
   end
 
   def load_recent
-    @compromises = Compromise.where("id > :first_id", {first_id: params[:id]}).limit(10)
+    @compromises = Compromise.where("id > :first_id AND band_id = :bandId", {first_id: params[:id], bandId: params[:bandId]}).limit(10)
     render json: @compromises
   end
 
   # Used to load just 10 old entries 
   def load_more
-    @compromises = Compromise.where("id < :last_id", {last_id: params[:id]}).order(id: :desc).limit(10)
+    @compromises = Compromise.where("id < :last_id AND band_id = :bandId", {last_id: params[:id], bandId: params[:bandId]}).order(id: :desc).limit(10)
     render json: @compromises
   end
 

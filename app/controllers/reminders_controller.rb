@@ -2,7 +2,7 @@ class RemindersController < ApplicationController
   # GET /reminders
   # GET /reminders.json
   def index
-    @reminders = Reminder.order(created_at: :desc)
+    @reminders = Reminder.where("band_id = :bandId", {bandId: params[:bandId]}).order(created_at: :desc)
 
     render json: @reminders
   end
