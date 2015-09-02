@@ -25,7 +25,10 @@ Rails.application.routes.draw do
 
   resources :bands
   match 'bands(/:id(.:format))' => 'bands#index', :via => :options
+  match 'bands_search' => 'bands#search', :via => :get
 
+  resources :band_requests
+  match 'band_requests(/:id(.:format))' => 'band_requests#index', :via => :options
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

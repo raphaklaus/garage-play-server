@@ -11,21 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813215607) do
+ActiveRecord::Schema.define(version: 20150902021328) do
+
+  create_table "band_requests", force: true do |t|
+    t.string   "band_id",    limit: 36, null: false
+    t.integer  "user_id"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "band_requests", ["band_id"], name: "index_band_requests_on_band_id", using: :btree
+  add_index "band_requests", ["user_id"], name: "index_band_requests_on_user_id", using: :btree
 
   create_table "bands", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "city"
     t.string   "genre"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "bands", ["user_id"], name: "index_bands_on_user_id", using: :btree
 
   create_table "bands_users", force: true do |t|
-    t.integer "band_id"
+    t.string  "band_id", limit: 36, null: false
     t.integer "user_id"
   end
 
@@ -48,10 +59,10 @@ ActiveRecord::Schema.define(version: 20150813215607) do
     t.integer  "periodicity"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "email_notification",    default: false
-    t.boolean  "sms_notification",      default: false
-    t.boolean  "facebook_notification", default: false
-    t.integer  "band_id"
+    t.boolean  "email_notification",               default: false
+    t.boolean  "sms_notification",                 default: false
+    t.boolean  "facebook_notification",            default: false
+    t.string   "band_id",               limit: 36,                 null: false
   end
 
   add_index "compromises", ["band_id"], name: "index_compromises_on_band_id", using: :btree
@@ -81,7 +92,7 @@ ActiveRecord::Schema.define(version: 20150813215607) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "band_id"
+    t.string   "band_id",    limit: 36, null: false
   end
 
   add_index "reminders", ["band_id"], name: "index_reminders_on_band_id", using: :btree

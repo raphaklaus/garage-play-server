@@ -17,6 +17,10 @@ gem 'whenever', require: false
 
 gem 'devise'
 
+gem 'thinking-sphinx', '~> 3.1.4'
+
+gem "uuidtools"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

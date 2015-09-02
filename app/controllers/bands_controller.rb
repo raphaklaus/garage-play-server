@@ -2,10 +2,21 @@ class BandsController < ApplicationController
   # GET /bands
   # GET /bands.json
   def index
-    @bands = Band.order(created_at: :desc)
-
+    @bands = Band.select("bands.id, bands.name, bands.city, bands.genre, bands_users.band_id, bands_users.user_id").joins(:bands_users).where("bands_users.user_id = :userId", {userId: params[:userId]})
+    #.force_encoding('utf-8')
+    # @bands[0].band_id = @bands[0].band_id.force_encoding("ISO-8859-1").encode("UTF-8")
     render json: @bands
   end
+
+  def search
+    if params[:name].to_s.empty?
+      @bands = []
+    else 
+      @bands = Band.search params[:name]
+    end
+      
+    render json: @bands
+  end  
 
   # GET /bands/1
   # GET /bands/1.json
