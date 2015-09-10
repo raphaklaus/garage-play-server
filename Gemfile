@@ -17,7 +17,8 @@ gem 'whenever', require: false
 
 gem 'devise'
 
-gem 'thinking-sphinx', '~> 3.1.4'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 gem "uuidtools"
 

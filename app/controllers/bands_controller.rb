@@ -3,19 +3,21 @@ class BandsController < ApplicationController
   # GET /bands.json
   def index
     @bands = Band.select("bands.id, bands.name, bands.city, bands.genre, bands_users.band_id, bands_users.user_id").joins(:bands_users).where("bands_users.user_id = :userId", {userId: params[:userId]})
-    #.force_encoding('utf-8')
-    # @bands[0].band_id = @bands[0].band_id.force_encoding("ISO-8859-1").encode("UTF-8")
     render json: @bands
   end
 
   def search
+    # Necessary for Elastic Search
+    Band.import
+
     if params[:name].to_s.empty?
-      @bands = []
+      @valid_bands = []
     else 
-      @bands = Band.search params[:name]
+      @bands = Band.search(params[:name]).records
+      @valid_bands = Band.select("bands.id, bands.name, bands.city, bands.genre, bands.user_id as admin_id, band_requests.id as band_requests_id, band_requests.band_id, band_requests.user_id, band_requests.status").joins("left outer join band_requests ON bands.id = band_requests.band_id").where("bands.id" => @bands.map(&:id))
     end
       
-    render json: @bands
+    render json: @valid_bands
   end  
 
   # GET /bands/1

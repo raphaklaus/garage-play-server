@@ -1,11 +1,13 @@
 class BandRequestsController < ApplicationController
   # GET /bands
   # GET /bands.json
-  # def index
-  #   @bands = Band.select("bands.id, bands.name, bands.city, bands.genre, bands_users.band_id, bands_users.user_id").joins(:bands_users).where("bands_users.user_id = :userId", {userId: params[:userId]})
+  def index
+    # DO NOT FORGET TO LIMIT ACCESS OUTSIDE LOCALHOST, OR NOT? 
+    
+    @bands = BandRequest.select("band_requests.id as band_requests_id, band_requests.band_id, band_requests.user_id, band_requests.status, users.id as user_id, users.name, users.email").joins(:user).where("band_id = :bandId AND status = 0", {bandId: params[:band_id]})
 
-  #   render json: @bands
-  # end
+    render json: @bands
+  end
 
   # GET /bands/1
   # GET /bands/1.json
@@ -33,6 +35,12 @@ class BandRequestsController < ApplicationController
     @band_requests = BandRequest.find(params[:id])
 
     if @band_requests.update(band_requests_params)
+      if params[:status] == 1
+        @band = Band.find(params[:band_id])
+        @user = User.find(params[:user_id])
+        @band.users << @user
+        @band.save
+      end
       head :no_content
     else
       render json: @band_requests.errors, status: :unprocessable_entity
