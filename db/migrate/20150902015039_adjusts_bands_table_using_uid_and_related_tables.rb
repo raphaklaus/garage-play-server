@@ -1,5 +1,6 @@
 class AdjustsBandsTableUsingUidAndRelatedTables < ActiveRecord::Migration
   def change
+  #do not drop here.. It will cause problems after this migration...
 	drop_table :bands
 
     create_table :bands, :id => false  do |t|

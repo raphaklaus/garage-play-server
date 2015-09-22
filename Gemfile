@@ -9,7 +9,9 @@ group :development do
   gem 'capistrano-rails', '~> 1.1.1'
 end
 
-gem 'mysql2'
+#changed to 0.3.18 because the new version is not fully compatible
+#gem 'mysql2'
+gem 'mysql2', '~> 0.3.18'
 
 gem 'thin'
 
