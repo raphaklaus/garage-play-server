@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902021328) do
+ActiveRecord::Schema.define(version: 20150930045637) do
 
   create_table "band_requests", force: true do |t|
     t.string   "band_id",    limit: 36, null: false
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 20150902021328) do
     t.string   "phone_number", limit: 16
     t.string   "social_id"
     t.integer  "social_type"
+    t.string   "instruments"
   end
 
 end
