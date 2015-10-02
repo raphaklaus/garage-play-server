@@ -20,6 +20,7 @@ class BandRequestsController < ApplicationController
   # POST /bands
   # POST /bands.json
   def create
+    #todo: block band request made by band admin.
     @band_requests = BandRequest.new(band_requests_params)
 
     if @band_requests.save

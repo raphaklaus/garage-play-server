@@ -14,7 +14,7 @@ class BandsController < ApplicationController
       @valid_bands = []
     else 
       @bands = Band.search(params[:name]).records
-      @valid_bands = Band.select("bands.id, bands.name, bands.city, bands.genre, bands.user_id as admin_id, band_requests.id as band_requests_id, band_requests.band_id, band_requests.user_id, band_requests.status").joins("left outer join band_requests ON bands.id = band_requests.band_id").where("bands.id" => @bands.map(&:id))
+      @valid_bands = Band.select("bands.id, bands.name, bands.city, bands.genre, bands.user_id as admin_id, band_requests.id as band_requests_id, band_requests.band_id, band_requests.user_id, band_requests.status").joins("left outer join band_requests ON bands.id = band_requests.band_id AND band_requests.user_id = " + BandRequest.sanitize(params[:userId])).where("bands.id" => @bands.map(&:id))
     end
       
     render json: @valid_bands
