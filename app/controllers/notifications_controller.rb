@@ -41,7 +41,7 @@ class NotificationsController < ApplicationController
 	private
 	def query_factory(type, days_before)
 		return Notification.select("compromises.title, compromises.description, 
-    	compromises.location, compromises.datehour, notifications.*").joins(:compromise)
+    	compromises.location, compromises.datehour, compromises.band_id, notifications.*").joins(:compromise)
     	.where("send_date >= :dateNow and send_date < :hoursBefore and sent is false and notification_type = :type",
     	 {:dateNow => Time.zone.now, :hoursBefore => days_before, :type => type})
 	end
