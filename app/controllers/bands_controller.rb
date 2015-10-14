@@ -6,6 +6,11 @@ class BandsController < ApplicationController
     render json: @bands
   end
 
+  # def test
+  #   @test = Band.includes(:users).where("id = 'abb6ee74-71eb-11e5-8012-080027b5756c'")
+  #   render json: @test[0].users.pluck(:email)
+  # end
+
   def search
     # Necessary for Elastic Search
     Band.import
