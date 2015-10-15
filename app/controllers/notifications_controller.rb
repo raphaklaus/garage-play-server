@@ -24,10 +24,12 @@ class NotificationsController < ApplicationController
 	    @notifications = query_factory(1, 1.day.from_now)
 
 	    @notifications.each do |c|
+			    @band = Band.includes(:users).where("id" => c.band_id)
+			    @band_name = @band[0].name
 				@users_phones = User.all.pluck(:phone_number)
 				@users_phones.each do |p|
 					if !(p.nil? || p.empty?)
-						@message = "GaragePlay Compromisso: " + c.title + ", em " + c.datehour.strftime("%d/%m/%Y as %H:%M") + ", local: " + c.location;
+						@message = "GaragePlay Compromisso " + "(" + @band_name + "): " + c.title + ", em " + c.datehour.strftime("%d/%m/%Y as %H:%M") + ", local: " + c.location;
 						open('http://www.painelsms.com.br/sms.php?i=1101&s=h8jz0d&funcao=enviar&mensagem=' + URI.encode(@message) + '&destinatario=' + p)
 					end
 				end

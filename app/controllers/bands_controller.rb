@@ -8,7 +8,7 @@ class BandsController < ApplicationController
 
   def check_users_in_band_without_phone_number
     @users_without_number = Array.new
-    @band = Band.includes(:users).where('id = :bandId', {bandId: params[:bandId]})
+    @band = Band.includes(:users).where("id" => params[:bandId])
     @band[0].users.each do |t|
       if (t.phone_number.nil? || t.phone_number.empty?)
         @users_without_number.push(t.name)
