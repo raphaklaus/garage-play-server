@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :bands
   match 'bands(/:id(.:format))' => 'bands#index', :via => :options
   match 'bands_search' => 'bands#search', :via => :get
-  # match 'bands_test' => 'bands#test', :via => :get
+  match 'check_band_numbers' => 'bands#check_users_in_band_without_phone_number', :via => :get
 
   resources :band_requests, except: [:new, :edit]
   match 'band_requests(/:id(.:format))' => 'band_requests#index', :via => :options

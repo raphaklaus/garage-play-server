@@ -6,13 +6,19 @@ class BandsController < ApplicationController
     render json: @bands
   end
 
-  # def test
-  #   @test = Band.includes(:users).where("id = 'abb6ee74-71eb-11e5-8012-080027b5756c'")
-  #   render json: @test[0].users.pluck(:email)
-  # end
+  def check_users_in_band_without_phone_number
+    @users_without_number = Array.new
+    @band = Band.includes(:users).where('id = :bandId', {bandId: params[:bandId]})
+    @band[0].users.each do |t|
+      if (t.phone_number.nil? || t.phone_number.empty?)
+        @users_without_number.push(t.name)
+      end
+    end
+    render json: @users_without_number
+  end
 
   def search
-    # Necessary for Elastic Search
+    # Below is Necessary for Elastic Search?
     Band.import
 
     if params[:name].to_s.empty?
